@@ -28,7 +28,6 @@ Gem::Specification.new do |s|
      "spec/fixtures/file.unknown",
      "spec/mime_type_spec.rb",
      "spec/spec_helper.rb",
-     "tasks/mimetype_fu_tasks.rake",
      "test/mimetype_fu_test.rb",
      "uninstall.rb"
   ]
