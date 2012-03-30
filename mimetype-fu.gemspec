@@ -12,37 +12,16 @@ Gem::Specification.new do |s|
   s.extra_rdoc_files = [
     "README"
   ]
-  s.files = [
-    "MIT-LICENSE",
-     "README",
-     "Rakefile",
-     "VERSION",
-     "init.rb",
-     "install.rb",
-     "lib/extensions_const.rb",
-     "lib/mime_types.yml",
-     "lib/mimetype_fu.rb",
-     "mimetype-fu.gemspec",
-     "spec/fixtures/file.jpg",
-     "spec/fixtures/file.rb",
-     "spec/fixtures/file.unknown",
-     "spec/mime_type_spec.rb",
-     "spec/spec_helper.rb",
-     "test/mimetype_fu_test.rb",
-     "uninstall.rb"
-  ]
+  s.files = `git ls-files`.split("\n")
   s.has_rdoc = true
   s.homepage = %q{http://github.com/jfrench/mimetype-fu}
   s.rdoc_options = ["--charset=UTF-8"]
   s.require_paths = ["lib"]
   s.rubygems_version = %q{1.3.2}
   s.summary = %q{get the mimetype of a file directly in Ruby}
-  s.test_files = [
-    "spec/fixtures/file.rb",
-     "spec/mime_type_spec.rb",
-     "spec/spec_helper.rb",
-     "test/mimetype_fu_test.rb"
-  ]
+  s.test_files  = `git ls-files -- {test,spec,features}/*`.split("\n")
+
+  s.add_development_dependency "rspec"
 
   if s.respond_to? :specification_version then
     current_version = Gem::Specification::CURRENT_SPECIFICATION_VERSION
