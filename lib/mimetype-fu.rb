@@ -7,14 +7,13 @@ require 'tempfile'
 require File.dirname(__FILE__) + '/extensions_const'
 
 class File
-
   def self.mime_type(file)
     case file
-    when File, Tempfile, ActionDispatch::Http::UploadedFile
+    when File, Tempfile
       mime = parse(`file --mime -br "#{file.path}"`.strip) unless RUBY_PLATFORM.include? 'mswin32'
-      mime = EXTENSIONS[File.extname(file.path).gsub('.','').downcase.to_sym] if mime == 'application/octet-stream' || mime.nil?
+      mime = EXTENSIONS[File.extname(file.path).gsub('.','').downcase.to_s] if mime == 'application/octet-stream' || mime.nil?
     when String
-      mime = EXTENSIONS[(file[file.rindex('.')+1, file.size]).downcase.to_sym] unless file.rindex('.').nil?
+      mime = EXTENSIONS[(file[file.rindex('.')+1, file.size]).downcase.to_s] unless file.rindex('.').nil?
     when StringIO
       temp = File.open(Dir.tmpdir + '/upload_file.' + Process.pid.to_s, 'wb')
       temp << file.string
@@ -24,7 +23,7 @@ class File
     end
     
     return mime || 'unknown/unknown'
-   end
+  end
 
   def self.parse(mime)
     mime.gsub(/^.*: */,"").gsub(/;.*$/,"").gsub(/,.*$/,"").gsub(/;? charset=.*/, "")
@@ -33,5 +32,4 @@ class File
   def self.extensions
     EXTENSIONS
   end
-
 end
